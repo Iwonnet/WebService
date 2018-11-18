@@ -22,7 +22,7 @@ public class UserController {
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
 	@Path("add")
 	public String addUser(@FormParam("name") String name) {
 		System.out.println(name);
