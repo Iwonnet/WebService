@@ -22,10 +22,13 @@ public class UserController {
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	@Produces(MediaType.TEXT_PLAIN)
+	@Produces(MediaType.APPLICATION_JSON)
 	@Path("add")
-	public String addUser(@FormParam("name") String name) {
-		System.out.println(name);
+	public String addUser(@FormParam("Id") int Id,@FormParam("name") String name,
+			@FormParam("email") String email,@FormParam("password") String password) {
+		
+		User user = new User(Id, name, email, password);
+		System.out.println(user.toString());
 		return "Server says hello " + name + "!";
 	}
 }
