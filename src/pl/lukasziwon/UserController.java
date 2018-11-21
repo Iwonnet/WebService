@@ -30,6 +30,6 @@ public class UserController {
 		User user = new User(Id, name, email, password);
 		System.out.println(user.toString());
 		UserDAO.addUser(user);
-		return "Server says hello " + name + "!";
+		return name;
 	}
 }

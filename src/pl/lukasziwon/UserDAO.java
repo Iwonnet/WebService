@@ -9,8 +9,6 @@ public class UserDAO {
 	
 	public static List<User> getUsers(){
 		
-		users.add(new User(1, "Jacek", "Nowak", "jacek@gmail.com"));
-		
 		return users;
 	}
 
@@ -18,4 +16,6 @@ public class UserDAO {
 		users.add(user);
 		
 	}
+
+	
 }
