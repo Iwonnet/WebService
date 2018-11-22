@@ -32,4 +32,11 @@ public class UserController {
 		UserDAO.addUser(user);
 		return name;
 	}
+	
+	@Path("all/hibernate")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<User> getAllUsers(){
+		return UserDAO.getAllUsers();
+	}
 }

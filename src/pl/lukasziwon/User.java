@@ -1,11 +1,21 @@
 package pl.lukasziwon;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
+@Entity
+@Table(name = "user")
 public class User {
 
-	private int Id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 	private String name;
 	private String email;
 	private String password;
@@ -16,18 +26,18 @@ public class User {
 
 	public User(int id, String name, String email, String password) {
 		super();
-		Id = id;
+		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.password = password;
 	}
 
 	public int getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(int id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public String getName() {
@@ -56,7 +66,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [Id=" + Id + ", name=" + name + ", email=" + email + ", password=" + password + "]";
+		return "User [Id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + "]";
 	}
 	
 	
