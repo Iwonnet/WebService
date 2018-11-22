@@ -43,4 +43,32 @@ public class UserDAO {
 		return users;
 	}
 
+	public static void addUserHibernate(String name, String password, String email) {
+		SessionFactory sessionFactory = new Configuration()
+				.configure("hibernate.cfg.xml")
+				.addAnnotatedClass(User.class)
+				.buildSessionFactory();
+		
+		Session session = sessionFactory.getCurrentSession();
+		session.beginTransaction();
+		
+		try {
+			User user = new User();
+			user.setName(name);
+			user.setEmail(email);
+			user.setPassword(password);
+			
+			
+			session.save(user);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+
+		} finally {
+			session.close();
+			sessionFactory.close();
+		}
+	}
+	
+	
+
 }

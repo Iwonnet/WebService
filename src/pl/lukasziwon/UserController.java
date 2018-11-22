@@ -39,4 +39,13 @@ public class UserController {
 	public List<User> getAllUsers(){
 		return UserDAO.getAllUsers();
 	}
+	
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Path("all/hibernate/add")
+	public String addUserHibernate(@FormParam("name")String name,@FormParam("password") String password,@FormParam("email") String email) {
+		UserDAO.addUserHibernate(name,password,email);
+		return "New user added to database!";
+	}
 }
