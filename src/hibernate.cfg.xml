@@ -17,6 +17,7 @@
 		
 		<property name="hibernate.show_sql">true</property>
 		<property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>
+		
 
 		<mapping class="pl.lukasziwon.User"></mapping>
 	</session-factory>

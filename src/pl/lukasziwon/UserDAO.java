@@ -2,10 +2,14 @@ package pl.lukasziwon;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import javax.persistence.criteria.*;
+import org.hibernate.*;
+import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+
+
 
 public class UserDAO {
 
@@ -67,6 +71,33 @@ public class UserDAO {
 			session.close();
 			sessionFactory.close();
 		}
+	}
+
+	public static void deleteUserHibernate(String name) {
+		SessionFactory sessionFactory = new Configuration()
+				.configure("hibernate.cfg.xml")
+				.addAnnotatedClass(User.class)
+				.buildSessionFactory();
+		
+		Session session = sessionFactory.openSession();
+		
+		try {
+			User user = new User();
+			
+			user = (User) session.get(User.class, name);
+			
+			session.delete(user);
+			
+			session.beginTransaction();
+			session.getTransaction().commit();
+		} catch (Exception e) {
+
+		} finally {
+			session.close();
+			sessionFactory.close();
+		}
+		
+		
 	}
 	
 	
