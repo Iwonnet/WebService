@@ -5,11 +5,16 @@ import java.util.List;
 import javax.persistence.criteria.*;
 import org.hibernate.*;
 import org.hibernate.query.Query;
+
+import twitter4j.*;
+import twitter4j.Status;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-
-
 
 public class UserDAO {
 
@@ -26,9 +31,7 @@ public class UserDAO {
 	}
 
 	public static List<User> getAllUsers() {
-		SessionFactory sessionFactory = new Configuration()
-				.configure("hibernate.cfg.xml")
-				.addAnnotatedClass(User.class)
+		SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(User.class)
 				.buildSessionFactory();
 
 		Session session = sessionFactory.getCurrentSession();
@@ -48,21 +51,18 @@ public class UserDAO {
 	}
 
 	public static void addUserHibernate(String name, String password, String email) {
-		SessionFactory sessionFactory = new Configuration()
-				.configure("hibernate.cfg.xml")
-				.addAnnotatedClass(User.class)
+		SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(User.class)
 				.buildSessionFactory();
-		
+
 		Session session = sessionFactory.getCurrentSession();
 		session.beginTransaction();
-		
+
 		try {
 			User user = new User();
 			user.setName(name);
 			user.setEmail(email);
 			user.setPassword(password);
-			
-			
+
 			session.save(user);
 			session.getTransaction().commit();
 		} catch (Exception e) {
@@ -74,20 +74,18 @@ public class UserDAO {
 	}
 
 	public static void deleteUserHibernate(String name) {
-		SessionFactory sessionFactory = new Configuration()
-				.configure("hibernate.cfg.xml")
-				.addAnnotatedClass(User.class)
+		SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(User.class)
 				.buildSessionFactory();
-		
+
 		Session session = sessionFactory.openSession();
-		
+
 		try {
 			User user = new User();
-			
+
 			user = (User) session.get(User.class, name);
-			
+
 			session.delete(user);
-			
+
 			session.beginTransaction();
 			session.getTransaction().commit();
 		} catch (Exception e) {
@@ -96,10 +94,9 @@ public class UserDAO {
 			session.close();
 			sessionFactory.close();
 		}
-		
-		
+
 	}
-	
+
 	
 
 }
